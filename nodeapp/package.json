@@ -1,0 +1,25 @@
+{
+  "name": "recyclebackend",
+  "version": "1.0.0",
+  "description": "Backend for the recycle identifying app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xapatjb4/Yhack19.git"
+  },
+  "keywords": [
+    "recycle"
+  ],
+  "author": "xa.patjb4@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xapatjb4/Yhack19/issues"
+  },
+  "homepage": "https://github.com/xapatjb4/Yhack19#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
