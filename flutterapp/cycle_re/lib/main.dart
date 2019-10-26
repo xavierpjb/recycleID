@@ -53,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
   File file;
 
   void _choose() async {
-    //file = await ImagePicker.pickImage(source: ImageSource.camera);
-    file = await ImagePicker.pickImage(source: ImageSource.gallery);
+    file = await ImagePicker.pickImage(source: ImageSource.camera);
+    //file = await ImagePicker.pickImage(source: ImageSource.gallery);
   }
 
   void _upload() {
