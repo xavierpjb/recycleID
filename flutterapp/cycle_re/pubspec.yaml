@@ -24,6 +24,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   image_picker:
+  camera:
+  path_provider:
+  path:
+  esys_flutter_share:
   http:
 
 dev_dependencies:
