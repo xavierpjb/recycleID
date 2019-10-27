@@ -35,13 +35,13 @@ import 'package:cycle_re/imgclass.dart';
 import 'package:cycle_re/recyclescreen.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
+import 'package:loading/loading.dart';
 import 'package:path/path.dart';
 import 'package:http/http.dart' as http;
 
-
 class PreviewImageScreen extends StatefulWidget {
   final String imagePath;
-  
 
   PreviewImageScreen({this.imagePath});
 
@@ -49,35 +49,56 @@ class PreviewImageScreen extends StatefulWidget {
   _PreviewImageScreenState createState() => _PreviewImageScreenState();
 }
 
-
 class _PreviewImageScreenState extends State<PreviewImageScreen> {
   final String nodeEndPoint = 'http://172.27.90.156:8000/image';
   //File file;
-  
+  bool loadVis = false;
+
+  void _showLoadVis(){
+    setState(() {
+      loadVis = true;
+    });
+  }
+
+  void _hideLoadVis(){
+     setState(() {
+      loadVis = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Preview'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.lightBlue,
       ),
       body: Container(
+        color: Colors.lightGreen,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            loadVis? new Container(
+              color: Colors.lightBlue,
+              child: Center(
+                child: Loading(indicator: BallPulseIndicator(), size: 100.0),
+              ),
+            ): new Container(),
             Expanded(
-                flex: 2,
+                flex: 5,
                 child: Image.file(File(widget.imagePath), fit: BoxFit.cover)),
             SizedBox(height: 10.0),
             Flexible(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(20.0),
                 child: RaisedButton(
                   onPressed: () {
-                    _upload(File(widget.imagePath),context);
+                    _showLoadVis();
+                    _upload(File(widget.imagePath), context);
                   },
-                  child: Text('Share'),
+                  child: Text('Analyze'),
                 ),
               ),
             ),
@@ -88,9 +109,8 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
   }
 
   //make the json body
-  
-  void _upload(file, context) {
 
+  void _upload(file, context) {
     if (file == null) return;
     String base64Image = base64Encode(file.readAsBytesSync());
     String fileName = file.path.split("/").last;
@@ -107,16 +127,19 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
       var imgclass = ImgClass.fromJson(parsedJson[0]);
       print(imgclass.displayName);
       //change screen to bin to throw away
+
       Navigator.push(
-        context, 
-        MaterialPageRoute(
-          builder: (context)=>RecycleScreen(bin:imgclass.displayName),
-          )
-        );
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecycleScreen(bin: imgclass.displayName),
+          ));
+      
+      _hideLoadVis();
     }).catchError((err) {
       print(err);
     });
   }
+
   Future<ByteData> getBytesFromFile() async {
     Uint8List bytes = File(widget.imagePath).readAsBytesSync() as Uint8List;
     return ByteData.view(bytes.buffer);

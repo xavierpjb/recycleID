@@ -52,11 +52,6 @@ app.post('/image', (req, res) => {
     var name = req.body.name;
     var img = req.body.image;
     var realFile = Buffer.from(img, "base64");
-    // fs.writeFile(name, realFile, function (err) {
-    //     if (err)
-    //         console.log(err);
-    // });
-    // const content = fs.readFileSync(filePath, 'base64');
 
     const params = {};
 
@@ -67,23 +62,9 @@ app.post('/image', (req, res) => {
     // Set the payload by giving the content and type of the file.
     const payload = {};
     payload.image = {imageBytes: img};
-  
-    // params is additional domain-specific parameters.
-    // currently there is no additional parameters supported.
-    // const [response] = await client.predict({
-    //     name: modelFullId,
-    //     payload: payload,
-    //     params: params,
-    //   });
-    //   console.log(`Prediction results:`);
-    //   response.payload.forEach(result => {
-    //     console.log(`Predicted class name: ${result.displayName}`);
-    //     console.log(`Predicted class score: ${result.classification.score}`);
-    //   });
     sendToGo( modelFullId,payload,params,res);
-    //res.send("OK");
-
 });
+
 async function sendToGo(modelFullId,payload,params,res){
      // params is additional domain-specific parameters.
     // currently there is no additional parameters supported.

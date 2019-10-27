@@ -50,11 +50,20 @@ class _CameraScreenState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Click To Share'),
-        backgroundColor: Colors.blueGrey,
+      appBar:AppBar(
+            // ...
+            centerTitle: true,
+            title: Text(
+              "re:cycle",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            
+            backgroundColor: Colors.lightBlue,
       ),
+         
       body: Container(
+        color: Colors.lightGreen,
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,7 +72,7 @@ class _CameraScreenState extends State {
                 flex: 1,
                 child: _cameraPreviewWidget(),
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 30.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -72,7 +81,7 @@ class _CameraScreenState extends State {
                   Spacer()
                 ],
               ),
-              SizedBox(height: 20.0)
+              SizedBox(height: 30.0)
             ],
           ),
         ),
@@ -164,7 +173,7 @@ class _CameraScreenState extends State {
           mainAxisSize: MainAxisSize.max,
           children: [
             FloatingActionButton(
-                child: Icon(Icons.camera),
+                child: Image.asset("assets/images/Group14@3x.png"),
                 backgroundColor: Colors.blueGrey,
                 onPressed: () {
                   _onCapturePressed(context);
