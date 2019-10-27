@@ -80,11 +80,11 @@ app.post('/image', (req, res) => {
     //     console.log(`Predicted class name: ${result.displayName}`);
     //     console.log(`Predicted class score: ${result.classification.score}`);
     //   });
-    sendToGo( modelFullId,payload,params);
-    res.send("OK");
+    sendToGo( modelFullId,payload,params,res);
+    //res.send("OK");
 
 });
-async function sendToGo(modelFullId,payload,params){
+async function sendToGo(modelFullId,payload,params,res){
      // params is additional domain-specific parameters.
     // currently there is no additional parameters supported.
     const [response] = await client.predict({
@@ -97,6 +97,8 @@ async function sendToGo(modelFullId,payload,params){
         console.log(`Predicted class name: ${result.displayName}`);
         console.log(`Predicted class score: ${result.classification.score}`);
       });
+      //return 
+      res.send(response.payload);//getting the stats of the image
 }
 
 app.listen(8000, () => {

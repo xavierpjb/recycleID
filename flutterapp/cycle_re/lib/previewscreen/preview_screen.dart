@@ -28,14 +28,19 @@
  * THE SOFTWARE.
  */
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cycle_re/imgclass.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:http/http.dart' as http;
+
 
 class PreviewImageScreen extends StatefulWidget {
   final String imagePath;
+  
 
   PreviewImageScreen({this.imagePath});
 
@@ -43,7 +48,11 @@ class PreviewImageScreen extends StatefulWidget {
   _PreviewImageScreenState createState() => _PreviewImageScreenState();
 }
 
+
 class _PreviewImageScreenState extends State<PreviewImageScreen> {
+  final String nodeEndPoint = 'http://172.27.90.156:8000/image';
+  //File file;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +74,7 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
                 padding: EdgeInsets.all(60.0),
                 child: RaisedButton(
                   onPressed: () {
-                    getBytesFromFile().then((bytes) {
-                      Share.file('Share via:', basename(widget.imagePath),
-                          bytes.buffer.asUint8List(), 'image/png');
-                    });
+                    _upload(File(widget.imagePath));
                   },
                   child: Text('Share'),
                 ),
@@ -80,6 +86,30 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
     );
   }
 
+  //make the json body
+  
+  void _upload(file) {
+
+    if (file == null) return;
+    String base64Image = base64Encode(file.readAsBytesSync());
+    String fileName = file.path.split("/").last;
+
+    //Send to loading screen
+
+    http.post(nodeEndPoint, body: {
+      "image": base64Image,
+      "name": fileName,
+    }).then((res) {
+      //if the status code 200 send the image classification
+      print(res.body);
+      var parsedJson = json.decode(res.body);
+      var imgclass = ImgClass.fromJson(parsedJson[0]);
+      print(imgclass.displayName);
+      //change screen to bin to throw away
+    }).catchError((err) {
+      print(err);
+    });
+  }
   Future<ByteData> getBytesFromFile() async {
     Uint8List bytes = File(widget.imagePath).readAsBytesSync() as Uint8List;
     return ByteData.view(bytes.buffer);
