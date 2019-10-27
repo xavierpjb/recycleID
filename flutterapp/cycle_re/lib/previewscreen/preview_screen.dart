@@ -32,6 +32,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:cycle_re/imgclass.dart';
+import 'package:cycle_re/recyclescreen.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
@@ -74,7 +75,7 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
                 padding: EdgeInsets.all(60.0),
                 child: RaisedButton(
                   onPressed: () {
-                    _upload(File(widget.imagePath));
+                    _upload(File(widget.imagePath),context);
                   },
                   child: Text('Share'),
                 ),
@@ -88,7 +89,7 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
 
   //make the json body
   
-  void _upload(file) {
+  void _upload(file, context) {
 
     if (file == null) return;
     String base64Image = base64Encode(file.readAsBytesSync());
@@ -106,6 +107,12 @@ class _PreviewImageScreenState extends State<PreviewImageScreen> {
       var imgclass = ImgClass.fromJson(parsedJson[0]);
       print(imgclass.displayName);
       //change screen to bin to throw away
+      Navigator.push(
+        context, 
+        MaterialPageRoute(
+          builder: (context)=>RecycleScreen(bin:imgclass.displayName),
+          )
+        );
     }).catchError((err) {
       print(err);
     });

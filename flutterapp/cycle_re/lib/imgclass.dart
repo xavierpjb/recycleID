@@ -37,7 +37,7 @@ class Classification {
   Classification({this.score});
 
   Classification.fromJson(Map<String, dynamic> json) {
-    score = json['score'];
+    score = json['score'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
