@@ -80,35 +80,35 @@ class _RecycleScreen extends State<RecycleScreen> {
     String prompt;
     switch (widget.bin) {
       case "trash":
-        prompt = "Throw into Trash bin\n" +
-            "We recycle over 70% of the waste we generate in the unincorporated area, meaning only 30% gets buried in landfills. Unfortunately, this is still a lot of trash. In fact, the amount of trash disposed of today is roughly the same as it was ten years ago,\n" +
-            "despite the fact that recycling has increased. This means that even though our community is recycling more, each person on average throws away more trash and recycling than they did before\n" +
-            "How do we stop trash?\n" +
-            "Buying recycled-content products and choosing products that have less packaging are also great ways to cut the amount of trash you generate";
+        prompt = " ---> Throw into Trash bin\n\n"
+        + "* We recycle over 70% of the waste we generate in the unincorporated area, meaning only 30% gets buried in landfills. Unfortunately, this is still a lot of trash. In fact, the amount of trash disposed of today is roughly the same as it was ten years ago,\n\n"
+        + "* Despite the fact that recycling has increased. This means that even though our community is recycling more, each person on average throws away more trash and recycling than they did before\n\n"
+        + "* How do we stop trash?\n"
+        + "- Buying recycled-content products and choosing products that have less packaging are also great ways to cut the amount of trash you generate";
         break;
       case "plastic":
       case "metal":
       case "glass":
-        prompt = "Throw into plastic/metal/glass bin\n" +
-            "Plastics that can be recycled are first sorted, shredded and rid of impurities like paper.\n" +
-            "The shreds are then melted and formed into pellets, which can be made into other products." +
-            "How do we stop plastic?\n" +
-            "The best solutions for our plastic problem are still to reduce our use of them, and to reuse and recycle whenever possible. More policies that ban plastic bag use,\n" +
-            "require bottle deposits and expand recycling would help. But millions of tons of plastic waste still sit in landfills around the country" +
-            "technologies that are able to tap this waste as a resource can offer multiple benefits, helping to clean up the environment, lessen our dependence on foreign oil,\n" +
-            "decrease our use of non-renewable virgin resources, reduce greenhouse gas emissions, and generate energy";
+        prompt = " ---> Throw into plastic/metal/glass bin\n\n"
+        + "* Plastics that can be recycled are first sorted, shredded and rid of impurities like paper.\n\n"
+        + "* The shreds are then melted and formed into pellets, which can be made into other products.\n\n"
+        + "* How do we stop plastic?:\n"
+        + "- The best solutions for our plastic problem are still to reduce our use of them, and to reuse and recycle whenever possible. More policies that ban plastic bag use,\n"
+        + "- Require bottle deposits and expand recycling would help. But millions of tons of plastic waste still sit in landfills around the country\n"
+        + "- Technologies that are able to tap this waste as a resource can offer multiple benefits, helping to clean up the environment, lessen our dependence on foreign oil,\n"
+        + "- Decrease our use of non-renewable virgin resources, reduce greenhouse gas emissions, and generate energy";
         break;
       case "paper":
       case "carboard":
-        prompt = "Throw into paper/cardboard bin\n" +
-            "Each year, over 400 million metric tons of paper and cardboard is produced globally, with over half of production originating from China, the United States, and Japan.\n" +
-            "Each metric ton (1,000 kilograms) of recycled paper can save approximately:\n" +
-            "19 trees that can absorb 127 kilograms of carbon dioxide from the atmosphere each year\n" +
-            "1,500 liters of oil" +
-            "2.68 cubic meters of landfill space" +
-            "4,400 kilowatts of energy" +
-            "29,000 liters of water" +
-            "Our mission is to create a sustainable environment in the society. By using our app, you have helped us to move forward to a more sustainable society. Thank you!";
+        prompt = " ---> Throw into paper/cardboard bin\n\n"
+        + "* Each year, over 400 million metric tons of paper and cardboard is produced globally, with over half of production originating from China, the United States, and Japan.\n\n"
+        + "* Each metric ton (1,000 kilograms) of recycled paper can save approximately:\n"
+        + "- 19 trees that can absorb 127 kilograms of carbon dioxide from the atmosphere each year\n"
+        + "- 1,500 liters of oil"
+        + "- 2.68 cubic meters of landfill space"
+        + "- 4,400 kilowatts of energy"
+        + "- 29,000 liters of water"
+        + "Our mission is to create a sustainable environment in the society. By using our app, you have helped us to move forward to a more sustainable society. Thank you!";
         break;
     }
     return prompt;
