@@ -15,13 +15,55 @@ class _RecycleScreen extends State<RecycleScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Result'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: detCol(),
       ),
       body: Container(
-        child: Text(widget.bin)
+        child: Text(prompt())
       )
     );
   }
+
+  //Determing the color based on the item result
+  Color detCol(){
+    Color color;
+
+    switch(widget.bin){
+      case "trash":
+        color = Colors.black;
+        break;
+      case "plastic":
+      case "metal":
+      case "glass":
+        color = Colors.lightGreen;
+        break;
+      case "paper":
+      case "carboard":
+        color = Colors.lightBlue;
+        break;
+    }
+    return color;
+  }
+
+  String prompt(){
+    String prompt;
+    switch(widget.bin){
+      case "trash":
+        prompt = "Throw into Trash bin";
+        break;
+      case "plastic":
+      case "metal":
+      case "glass":
+        prompt = "Throw into plastic/metal/glass bin";
+        break;
+      case "paper":
+      case "carboard":
+        prompt = "Throw into paper/cardboard bin";
+        break;
+    }
+    return prompt;
+  }
+
 
 }
